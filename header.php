@@ -35,7 +35,9 @@
                                 </ul>
                             </li>
                             <!-- <li class=""><a rel="sponsored" href="https://templatemo.com" target="_blank">External URL</a></li> -->
-                            <li class="scroll-to-section"><a href="#reservation">Contact Us</a></li> 
+                            <li class="scroll-to-section"><a href="#reservation">Reach Us</a></li> 
+
+                            <li class="scroll-to-section"><a href="#reservation">Sign Up</a></li> 
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
