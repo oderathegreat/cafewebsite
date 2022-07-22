@@ -1,6 +1,4 @@
 <?php
-
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -26,10 +24,7 @@ if(isset($_POST['submit'])) {
 
        //check if our query runs
        if ($run) {
-        echo '<div class="alert alert-success alert-dismissable" id="flash-msg">
-<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-<h4><i class="icon fa fa-check"></i>Success!</h4>
-</div>';
+        echo 'Reservation Made Successfully'
        }
        else {
         echo 'Data not  submitted';
