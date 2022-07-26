@@ -9,8 +9,10 @@
 
         $firstname = mysqli_real_escape_string($conn, $_POST["fname"]);
         $lastname = mysqli_real_escape_string($conn, $_POST["lname"]);
+
         $email = mysqli_real_escape_string($conn, $_POST["email"]);
         $phone = mysqli_real_escape_string($conn, $_POST["phone"]);
+        $countyname = mysqli_real_escape_string($conn, $_POST["county"]);
         $password = mysqli_real_escape_string($conn, md5($_POST["password"]));
         $cpassword = mysqli_real_escape_string($conn, md5($_POST["cpassword"]));
       
@@ -21,7 +23,7 @@
         
         else {
             if ($password === $cpassword) {
-                $sql = "INSERT INTO registeredusers (firstname,lastname,email,phonenumber,userpassword) VALUES ('{$firstname}', '{$lastname}', '{$email}', '{$phone}', '{$password}')";
+                $sql = "INSERT INTO registeredusers (firstname,lastname,email,phonenumber,county,userpassword) VALUES ('{$firstname}', '{$lastname}', '{$email}', '{$phone}', '{$countyname}','{$password}')";
                 $result = mysqli_query($conn, $sql);
 
                 if ($result) {
@@ -42,11 +44,6 @@
         }
     }
 ?>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,6 +119,8 @@ https://templatemo.com/tm-558-klassy-cafe
       <input type="email" name="email" id = "email" required value=""  placeholder="Enter email" > <br>
 
       <input type="number" name="phone" id = "email" required value=""  placeholder="Enter Phone number" > <br>
+
+      <input type="text" name="county"  required value=""  placeholder="Enter your county" > <br>
       
       <input type="password" name="password" id = "password" required value="" placeholder="Enter password"> <br>
 

@@ -1,47 +1,29 @@
 <?php
-//take our config file
 
-require_once 'config.php';
+include 'config.php';
 
-if (isset($_POST["login"])) {
+session_start();
 
-    //getting our form data
-    $user_email = $_POST['email'];
-    $user_pass = $_POST['userpassword'];
-     
-    //checking if user record is present
-    $sql = "SELECT * FROM registeredusers WHERE email = '$user_email' && userpassword='$user_pass' ";
-    $result = mysqli_query($conn, $sql);
+error_reporting(0);
 
-
-    //check if successfull
- 
-
-    if(mysqli_num_rows($result) > 0) {
-        
-        session_start();
-
-        echo 'Login Success';
-
-        $_SESSION['email'] = $user_email;
-        //redirect user to relevant page
-        header("Location: dashboard.php");
-
-    }
-    else{
-    
-        echo 'Login Failed';
-
-
-    }
-    
-
+if (isset($_SESSION['username'])) {
+    header("Location: welcome.php");
 }
 
+if (isset($_POST['login'])) {
+	$email = $_POST['email'];
+	$password = md5($_POST['password']);
 
-
-
-
+	$sql = "SELECT * FROM registeredusers WHERE email='$email' AND userpassword='$password'";
+	$result = mysqli_query($conn, $sql);
+	if ($result->num_rows > 0) {
+		$row = mysqli_fetch_assoc($result);
+		//$_SESSION['username'] = $row['username'];
+		header("Location: dashboard.php");
+	} else {
+		echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+	}
+}
 
 
 
@@ -125,7 +107,7 @@ https://templatemo.com/tm-558-klassy-cafe
 
  
       
-      <input type="password" name="userpassword" id = "password" required value="" placeholder="Enter password"> <br>
+      <input type="password" name="password" id = "password" required value="" placeholder="Enter password"> <br>
 
       
       <button type="submit" name="login">LOGIN</button>
