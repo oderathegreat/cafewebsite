@@ -1,3 +1,53 @@
+<?php
+//take our config file
+
+require_once 'config.php';
+
+if (isset($_POST["login"])) {
+
+    //getting our form data
+    $user_email = $_POST['email'];
+    $user_pass = $_POST['userpassword'];
+     
+    //checking if user record is present
+    $sql = "SELECT * FROM registeredusers WHERE email = '$user_email' && userpassword='$user_pass' ";
+    $result = mysqli_query($conn, $sql);
+
+
+    //check if successfull
+ 
+
+    if(mysqli_num_rows($result) > 0) {
+        
+        session_start();
+
+        echo 'Login Success';
+
+        $_SESSION['email'] = $user_email;
+        //redirect user to relevant page
+        header("Location: dashboard.php");
+
+    }
+    else{
+    
+        echo 'Login Failed';
+
+
+    }
+    
+
+}
+
+
+
+
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,41 +115,30 @@ https://templatemo.com/tm-558-klassy-cafe
                 <div class="col-lg-6">
                     <div class="contact-form">
 
-
-                        <form id="contact" action="createaccount.php" method="post">
-                          <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Login to your account</h4>
-                            </div>
-                            <div class="col-lg-6 col-sm-12">
-                              <fieldset>
-                                <input name="fname" type="text" id="name" placeholder="Enter First Name*" required="">
-                              </fieldset>
-                            </div>
+                    <div class="contact-form">
+                    <form class="" action="" method="post" autocomplete="off">
+    
+    
                     
-             
-                            <div class="col-md-6 col-sm-12">
-                              
-                        </div>
-                            <div class="col-lg-12">
-                                <div id="filterDate2">    
-                                <fieldset>
-                                <input name="phone" type="password" id="phone" placeholder="Enter Password*" required="">
-                              </fieldset>
-                                
-                                </div>   
-                            </div>
+
+      <input type="email" name="email" id = "email" required value=""  placeholder="Enter email" > <br>
+
+ 
+      
+      <input type="password" name="userpassword" id = "password" required value="" placeholder="Enter password"> <br>
+
+      
+      <button type="submit" name="login">LOGIN</button>
+    </form>
 
 
-                            
-                            
-                            <div class="col-lg-12">
-                              <fieldset>
-                                <button type="submit" id="form-submit"  name="login" class="main-button-icon">Login</button>
-                              </fieldset>
-                            </div>
-                          </div>
-                        </form>
+
+
+                      
+                    
+                    </div>
+                       
+                    
                     </div>
                 </div>
             </div>
