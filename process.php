@@ -1,10 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "caffedb";
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+
+require_once('config.php');
 
 if(isset($_POST['submit'])) {
 
@@ -24,7 +20,7 @@ if(isset($_POST['submit'])) {
 
        //check if our query runs
        if ($run) {
-        echo 'Reservation Made Successfully'
+        echo 'Reservation Made Successfully';
        }
        else {
         echo 'Data not  submitted';

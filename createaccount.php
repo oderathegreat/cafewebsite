@@ -1,5 +1,7 @@
 <?php
 require 'config.php';
+
+
 if(!empty($_SESSION["id"])){
   header("Location: index.php");
 }
@@ -9,6 +11,7 @@ if(isset($_POST["submit"])){
   $email = $_POST["email"];
   $password = $_POST["password"];
   $confirmpassword = $_POST["confirmpassword"];
+  
   $duplicate = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username' OR email = '$email'");
   if(mysqli_num_rows($duplicate) > 0){
     echo
