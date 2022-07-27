@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cafe Website</title>
 	<!-- BOOTSTRAP STYLES-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="../assets/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
-    <link href="assets/css/custom.css" rel="stylesheet" />
+    <link href="../assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
@@ -47,7 +47,7 @@
 
 
                     <li class="active-link">
-                        <a href="/dashboard.php" ><i class="fa fa-desktop "></i>Dashboard <span class="badge"></span></a>
+                        <a href="../dashboard.php" ><i class="fa fa-desktop "></i>Dashboard <span class="badge"></span></a>
                     </li>
                    
 
@@ -81,7 +81,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     <h2>ADMIN DASHBOARD</h2>   
+                     <h2>Upload Section For Cake Products</h2>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
