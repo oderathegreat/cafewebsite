@@ -18,6 +18,7 @@ if (isset($_POST['login'])) {
 	$result = mysqli_query($conn, $sql);
 	if ($result->num_rows > 0) {
 		$row = mysqli_fetch_assoc($result);
+        echo 'Login success';
 		//$_SESSION['username'] = $row['username'];
 		header("Location: dashboard.php");
 	} else {
