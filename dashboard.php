@@ -104,6 +104,9 @@
                       </a>
                       </div>
                      
+
+                      <input type="text" placeholder="Enter title"/>
+                      
                      
                   </div> 
                  

@@ -1,4 +1,8 @@
+<?php
 
+include 'config.php';
+
+?>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -107,67 +111,95 @@
                     </div>
                     <div class="card-body">
 
+
                     
-                        <form action="userprofile.php" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                      <label for="name">Name</label>
-                      <input type="text" class="form-control" name="name"  placeholder="Enter Name" value="">
-                    </div>
-                    <div class="form-group">
-                      <label for="contact">Contact No:</label>
-                      <input type="text" class="form-control" name="contact" placeholder="Enter Mobile Number" value="">
-                    </div>
-                    <div class="form-group">
-                      <label for="email">E-Mail</label>
-                      <input type="email" class="form-control" name="email" placeholder="Enter Email" value="">
-                    </div>
-                    <div class="form-group">
-                      <label for="image">Choose Image</label>
-                      <input type="file" class="form-control" name="image" value="">
-                    </div>
-                    <div class="form-group">
-                      <button type="submit" name="Submit" class="btn btn-primary waves">Submit</button>
-                    </div>
-                     
-                        
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>ID Nunber</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+<?php  		            
+		
+$query = "SELECT * FROM profile ORDER BY id DESC ";
 
-                  
-                  <!-- /. ROW  -->    
-                 <div class="row text-center pad-top">
-                   
-           
-                 
-                  <!-- /. ROW  --> 
-    </div>
-             <!-- /. PAGE INNER  -->
-            </div>
-         <!-- /. PAGE WRAPPER  -->
-        </div>
-    <div class="footer">
-      
-    
-            <div class="row">
-                <div class="col-lg-12" >
- <a href="http://binarytheme.com" style="color:#fff;" target="_blank">www.binarytheme.com</a>
-                </div>
-            </div>
-        </div>
-          
+$result = mysqli_query($conn,$query);
 
-     <!-- /. WRAPPER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <!-- JQUERY SCRIPTS -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
-      <!-- BOOTSTRAP SCRIPTS -->
-    <script src="assets/js/bootstrap.min.js"></script>
-      <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
+if(mysqli_num_rows($result) > 0){
     
-   
-</body>
-</html>
+    while($row = mysqli_fetch_array($result)){
+        
+        $id    = $row['id'];
+        $name  = $row['name'];
+        $email = $row['contact'];
+        $batch = $row['email'];
+        $image = $row['image'];
+
+?>
+        
+        <tr>
+            <td><?=$id; ?></td>
+            <td><?=$name; ?></td>
+            <td><?=$email; ?></td>
+            <td><?=$batch; ?></td>
+            <td>
+               <img src= "<?= "uploads/".$image?>" alt="<?= $name ?>" class="thumbnail" width="100px" height="75px">
+            </td>
+            <td><a href="" class="btn btn-success btn-sm" role="button">Update</a>
+            <a href="" class="btn btn-danger btn-sm" id="delete" role="button">Delete</a></td>
+        </tr>
+<?php
+    }
+}  
+        
+    if(isset($_GET['delete'])){
+        
+        $id = $_GET['delete'];
+
+        $image = "SELECT * FROM student WHERE id = $id";
+        
+        $query1 = mysqli_query($conn,$image);
+
+        while($row = mysqli_fetch_array($query1))
+        {
+             $img= $row['image'];
+        }
+
+            unlink("images/".$img);
+
+        $query = "DELETE FROM student WHERE id = $id";
+        
+        $result = mysqli_query($conn,$query);
+        
+        if($result){
+
+            header('location:index.php');
+            
+        }
+    }    
+         
+?>
+
+    </table>
+</div>
+
+<script>
+    $(document).ready(function(){
+
+        $('#delete').click(function(){
+            if(!confirm("do you want to delete?"))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        });
+
+
+    });
+</script>

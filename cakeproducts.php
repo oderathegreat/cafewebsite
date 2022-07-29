@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -106,30 +104,25 @@
                         </h4>
                     </div>
                     <div class="card-body">
-
-                    
-                        <form action="userprofile.php" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                      <label for="name">Name</label>
-                      <input type="text" class="form-control" name="name"  placeholder="Enter Name" value="">
-                    </div>
-                    <div class="form-group">
-                      <label for="contact">Contact No:</label>
-                      <input type="text" class="form-control" name="contact" placeholder="Enter Mobile Number" value="">
-                    </div>
-                    <div class="form-group">
-                      <label for="email">E-Mail</label>
-                      <input type="email" class="form-control" name="email" placeholder="Enter Email" value="">
-                    </div>
-                    <div class="form-group">
+                        <form action="publish.php" method="POST">
+                                <label>Cake Title</label>
+                                <input type="text" name="inputcaketitle" class="form-control">
+                                <label>Cake Price</label>
+                                <input type="text" name="inputcakeprice" class="form-control">
+                                <div class="form-group">
                       <label for="image">Choose Image</label>
-                      <input type="file" class="form-control" name="image" value="">
+                      <input type="file" class="form-control" name="inputcakephoto" value="">
                     </div>
-                    <div class="form-group">
-                      <button type="submit" name="Submit" class="btn btn-primary waves">Submit</button>
-                    </div>
-                     
-                        
+                            <label>Cake Description</label>
+                            <div class="mb-3">
+                            <textarea id="w3review" name="inputcakedescription" rows="4" cols="50">
+                            </textarea>
+                            </div>
+                           
+                            <div class="mb-3">
+                                <button type="submit" name="save_cake" class="btn btn-primary">Save Cake Product</button>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -153,7 +146,7 @@
     
             <div class="row">
                 <div class="col-lg-12" >
- <a href="http://binarytheme.com" style="color:#fff;" target="_blank">www.binarytheme.com</a>
+                    &copy;  2014 yourdomain.com | Design by: <a href="http://binarytheme.com" style="color:#fff;" target="_blank">www.binarytheme.com</a>
                 </div>
             </div>
         </div>

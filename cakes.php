@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -5,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cafe Website</title>
 	<!-- BOOTSTRAP STYLES-->
-    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
-    <link href="../assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
-    <link href="../assets/css/custom.css" rel="stylesheet" />
+    <link href="assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
@@ -88,9 +90,8 @@
                   <hr />
                 <div class="row">
                     <div class="col-lg-12 ">
-                        <div class="alert alert-info">
-                             <strong>Welcome Jhon Doe ! </strong> You Have No pending Task For Today.
-                        </div>
+                    
+                    
                        
                     </div>
                     </div>
@@ -105,46 +106,34 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="code.php" method="POST">
 
-                            <div class="mb-3">
-                                <label>Cake Title</label>
-                                <input type="text" name="namebox" class="form-control">
-                            </div>
-                         
-                            
-                            <div class="mb-3">
-                                <label>Cake Price</label>
-                                <input type="text" name="price" class="form-control">
-                            </div>
+                    
+                        <form action="publishcakes.php" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label for="name">Cake Title</label>
+                      <input type="text" class="form-control" name="caketitle"  placeholder="Enter Cake Title" value="">
+                    </div>
+                    <div class="form-group">
+                      <label for="contact">Cake Price:</label>
+                      <input type="text" class="form-control" name="cakeprice" placeholder="Enter Cake Price" value="">
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Cake Description</label>
+                      <textarea id="w3review" name="cakedescription" rows="4" cols="50">
+
+                         </textarea>
+
+
+                    </div>
+                    <div class="form-group">
+                      <label for="image">Choose Image</label>
+                      <input type="file" class="form-control" name="image" value="">
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" name="Submit" class="btn btn-primary waves">Submit</button>
+                    </div>
+                     
                         
-                            
-
-                            <div class="mb-3">
-                                <label>Upload Cake Photo</label>
-                                <input type="file" id="myFile" name="filename" >
-                            </div>
-
-
-                            <label>Cake Description</label>
-
-                            <div class="mb-3">
-
-                           
-                                
-                            <textarea id="w3review" name="w3review" rows="4" cols="50">
-
-                              </textarea>
-
-
-                            </div>
-                            
-                           
-
-                            <div class="mb-3">
-                                <button type="submit" name="save_cake" class="btn btn-primary">Save Cake Product</button>
-                            </div>
-
                         </form>
                     </div>
                 </div>
@@ -168,7 +157,7 @@
     
             <div class="row">
                 <div class="col-lg-12" >
-                    &copy;  2014 yourdomain.com | Design by: <a href="http://binarytheme.com" style="color:#fff;" target="_blank">www.binarytheme.com</a>
+ <a href="http://binarytheme.com" style="color:#fff;" target="_blank">www.binarytheme.com</a>
                 </div>
             </div>
         </div>

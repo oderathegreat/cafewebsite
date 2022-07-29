@@ -1,4 +1,5 @@
 <?php
+
   require_once('config.php');
   $upload_dir = 'uploads/';
 
@@ -43,7 +44,7 @@
 					values('".$name."', '".$contact."', '".$email."', '".$userPic."')";
 			$result = mysqli_query($conn, $sql);
 			if($result){
-				$successMsg = 'New record added successfully';
+				echo '<div class="alert alert-success">Contact Info Saved Successfully</div>';
 				header('Location: index.php');
 			}else{
 				$errorMsg = 'Error '.mysqli_error($conn);
