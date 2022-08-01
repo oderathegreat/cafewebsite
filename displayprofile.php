@@ -8,8 +8,9 @@ include 'config.php';
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
       <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" http-equiv="Refresh" content="width=device-width, initial-scale=1.0" />
     <title>Cafe Website</title>
+
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -122,6 +123,8 @@ include 'config.php';
             <th>Image</th>
             <th>Action</th>
         </tr>
+
+       
 <?php  		            
 		
 $query = "SELECT * FROM profile ORDER BY id DESC ";
@@ -148,8 +151,8 @@ if(mysqli_num_rows($result) > 0){
             <td>
                <img src= "<?= "uploads/".$image?>" alt="<?= $name ?>" class="thumbnail" width="150px" height="75px">
             </td>
-            <td><a href="" class="btn btn-success btn-sm" role="button">Update</a>
-            <a href="" class="btn btn-danger btn-sm" id="delete" role="button">Delete</a></td>
+            <td><a href="updateprofile.php?update=<?php echo $id ?>" class="btn btn-success btn-sm" role="button">Update</a>
+            <a href="displayprofile.php?delete=<?php echo $id ?>" class="btn btn-danger btn-sm" id="delete" role="button">Delete</a></td>
         </tr>
 <?php
     }
@@ -159,7 +162,7 @@ if(mysqli_num_rows($result) > 0){
         
         $id = $_GET['delete'];
 
-        $image = "SELECT * FROM student WHERE id = $id";
+        $image = "SELECT * FROM profile WHERE id = $id";
         
         $query1 = mysqli_query($conn,$image);
 
@@ -168,15 +171,15 @@ if(mysqli_num_rows($result) > 0){
              $img= $row['image'];
         }
 
-            unlink("images/".$img);
+            unlink("uploads/".$img);
 
-        $query = "DELETE FROM student WHERE id = $id";
+        $querydelete = "DELETE FROM profile WHERE id = $id";
         
-        $result = mysqli_query($conn,$query);
+        $result = mysqli_query($conn,$querydelete);
         
         if($result){
 
-            header('location:index.php');
+            header('location:user.php');
             
         }
     }    
