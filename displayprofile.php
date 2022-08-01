@@ -179,7 +179,9 @@ if(mysqli_num_rows($result) > 0){
         
         if($result){
 
-            header('location:user.php');
+            echo 'Record deleted';
+
+           //header("Location:dashboard.php");
             
         }
     }    
