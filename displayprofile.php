@@ -146,7 +146,7 @@ if(mysqli_num_rows($result) > 0){
             <td><?=$email; ?></td>
             <td><?=$batch; ?></td>
             <td>
-               <img src= "<?= "uploads/".$image?>" alt="<?= $name ?>" class="thumbnail" width="100px" height="75px">
+               <img src= "<?= "uploads/".$image?>" alt="<?= $name ?>" class="thumbnail" width="150px" height="75px">
             </td>
             <td><a href="" class="btn btn-success btn-sm" role="button">Update</a>
             <a href="" class="btn btn-danger btn-sm" id="delete" role="button">Delete</a></td>
