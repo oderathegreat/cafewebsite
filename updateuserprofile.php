@@ -17,7 +17,7 @@ $result = mysqli_query($conn,$query);
 if(mysqli_num_rows($result) > 0){
     
     while($row = mysqli_fetch_array($result)){
-        
+
         $id    = $row['id'];
         $name  = $row['name'];
         $email = $row['contact'];
@@ -37,11 +37,11 @@ if(isset($_POST['update'])){
     $image_name   = $_FILES['image']['name'];
     $image        = $_FILES['image']['tmp_name'];
 
-    $location     = "images/".$image_name;
+    $location     = "uploads/".$image_name;
 
     move_uploaded_file($image, $location);
 
-    $query  = "UPDATE student SET ";
+    $query  = "UPDATE profile SET ";
     $query .= "name = '".escape($name)."', ";
     $query .= "batch = '".escape($batch)."', ";
     $query .= "email = '".escape($email)."', ";
@@ -51,6 +51,7 @@ if(isset($_POST['update'])){
     $result = mysqli_query($conn,$query);
     
     if($result){
+        echo 'Record Update Successfully';
         
         header('location:index.php');
     }
