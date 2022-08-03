@@ -27,35 +27,60 @@ if(mysqli_num_rows($result) > 0){
 }
 
 if(isset($_POST['Submit'])){
-    $name         = $_POST['name'];
-    $contact        =$_POST['contact'];
-    $email        = $_POST['email'];
-    $image_name   = $_FILES['image']['name'];
-    $image        = $_FILES['image']['tmp_name'];
+   
+    $name = $_POST['name'];
+    $contact = $_POST['contact'];
+    $email = $_POST['email'];
 
-    $location     = "uploads/".$image_name;
+    $imgName = $_FILES['image']['name'];
+		$imgTmp = $_FILES['image']['tmp_name'];
+		$imgSize = $_FILES['image']['size'];
 
-    move_uploaded_file($image, $location);
+        //var_dump($imgName);
 
-    $query  = "UPDATE profile SET ";
-    $query .= "name = '".escape($name)."', ";
-    $query .= "contact = '".escape($contact)."', ";
-    $query .= "email = '".escape($email)."', ";
-    $query .= "image = '{$image_name}' ";
-    $query .= "WHERE id = {$id} ";
+        if(empty($name)){
+			$errorMsg = 'Please your input name is empty';
+		}elseif(empty($contact)){
+			$errorMsg = 'Please your input contact is empty';
+		}elseif(empty($email)){
+			$errorMsg = 'Please your input email is empty';
+		}else{
+
+			$imgExt = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
+
+			$allowExt  = array('jpeg', 'jpg', 'png', 'gif');
+
+			$userPic = time().'_'.rand(1000,9999).'.'.$imgExt;
+
+			if(in_array($imgExt, $allowExt)){
+
+				if($imgSize < 5000000){
+					move_uploaded_file($imgTmp ,$upload_dir.$userPic);
+				}else{
+					$errorMsg = 'Image too large';
+				}
+			}else{
+				$errorMsg = 'Please select a valid image';
+			}
+		}
     
-    $result = mysqli_query($conn,$query);
+   
     
-    if($result){
+    if(!isset($errorMsg)){
 
-        echo 'Result Updated Successfully';
-        
-        header('location:displayprofile.php');
+        $sql = "update profile set name = '$name', contact = '$contact', email = '$email', image = '$userPic', ";
+
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            echo '<div class="alert alert-success">User Details Updated Successfully</div>';
+            header('Location: index.php');
+        }else{
+            $errorMsg = 'Error '.mysqli_error($conn);
+        }
+
     }
-    else
-    {
-        die('error' . mysql_error($conn));
-    }
+ 
+    
     
 }
 
@@ -175,18 +200,20 @@ if(isset($_POST['Submit'])){
                     </div>
                     <div class="form-group">
                       <label for="contact">Enter Contact:</label>
-                      <input type="text" class="form-control" name="email" placeholder="Enter Cake Price" value="<?php echo $contact ?>">
+                      <input type="text" class="form-control" name="email" placeholder="Enter Contact" value="<?php echo $contact ?>">
                     </div>
 
                     <div class="form-group">
                       <label for="contact">Enter Email:</label>
-                      <input type="text" class="form-control" name="contact" placeholder="Enter Cake Price" value="<?php echo $email ?>">
+                      <input type="email" class="form-control" name="contact" placeholder="Enter Email" value="<?php echo $email ?>">
                     </div>
            
                     
                     <div class="form-group">
                       <label for="image">Choose Image</label>
-                      <img src= "<?= "uploads/".$image?>" alt="" width="100px" height="100px" name="image"class="thumbnail">
+
+                      <input type="file" class="form-control" name="image" placeholder="Update Image" value="<?php echo $image ?>">
+                      <img src= "<?= "uploads/".$image?>" alt="" width="100px" height="100px" name="image" class="thumbnail">
                     </div>
                     <div class="form-group">
                       <button type="submit" name="Submit" class="btn btn-primary waves">Submit</button>
