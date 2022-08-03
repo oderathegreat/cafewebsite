@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+require_once 'config.php';
 ?>
 
 <?php 
@@ -20,69 +20,14 @@ if(mysqli_num_rows($result) > 0){
         $name  = $row['name'];
         $contact = $row['contact'];
         $email = $row['email'];
+    
         $image = $row['image'];
 
         }
     }
 }
 
-if(isset($_POST['Submit'])){
-   
-    $name = $_POST['name'];
-    $contact = $_POST['contact'];
-    $email = $_POST['email'];
 
-    $imgName = $_FILES['image']['name'];
-		$imgTmp = $_FILES['image']['tmp_name'];
-		$imgSize = $_FILES['image']['size'];
-
-        //var_dump($imgName);
-
-        if(empty($name)){
-			$errorMsg = 'Please your input name is empty';
-		}elseif(empty($contact)){
-			$errorMsg = 'Please your input contact is empty';
-		}elseif(empty($email)){
-			$errorMsg = 'Please your input email is empty';
-		}else{
-
-			$imgExt = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
-
-			$allowExt  = array('jpeg', 'jpg', 'png', 'gif');
-
-			$userPic = time().'_'.rand(1000,9999).'.'.$imgExt;
-
-			if(in_array($imgExt, $allowExt)){
-
-				if($imgSize < 5000000){
-					move_uploaded_file($imgTmp ,$upload_dir.$userPic);
-				}else{
-					$errorMsg = 'Image too large';
-				}
-			}else{
-				$errorMsg = 'Please select a valid image';
-			}
-		}
-    
-   
-    
-    if(!isset($errorMsg)){
-
-        $sql = "update profile set name = '$name', contact = '$contact', email = '$email', image = '$userPic', ";
-
-        $result = mysqli_query($conn,$sql);
-        if($result){
-            echo '<div class="alert alert-success">User Details Updated Successfully</div>';
-            header('Location: index.php');
-        }else{
-            $errorMsg = 'Error '.mysqli_error($conn);
-        }
-
-    }
- 
-    
-    
-}
 
 ?>
 <!DOCTYPE html>
@@ -187,26 +132,31 @@ if(isset($_POST['Submit'])){
                 <div class="card">
                     <div class="card-header">
                         <h4>
-                            <a href="index.php" class="btn btn-danger float-end">BACK</a>
+                            <a href="displayprofile.php" class="btn btn-danger float-end">VIEW USERS</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                     
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="user_update_handler.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="name">Enter Name</label>
+                      <input type="hidden" name="user_id" value="<?php echo $id; ?>">
                       <input type="text" class="form-control" name="name"  placeholder="Enter Name" value="<?php echo $name ?>">
-                    </div>
-                    <div class="form-group">
-                      <label for="contact">Enter Contact:</label>
-                      <input type="text" class="form-control" name="email" placeholder="Enter Contact" value="<?php echo $contact ?>">
                     </div>
 
                     <div class="form-group">
                       <label for="contact">Enter Email:</label>
-                      <input type="email" class="form-control" name="contact" placeholder="Enter Email" value="<?php echo $email ?>">
+                      <input type="text" class="form-control" name="email" placeholder="Enter Email" value="<?php echo $email ?>">
                     </div>
+
+
+                    <div class="form-group">
+                      <label for="contact">Enter Contact:</label>
+                      <input type="number" class="form-control" name="contact" placeholder="Enter Contact" value="<?php echo $contact ?>">
+                    </div>
+
+                   
            
                     
                     <div class="form-group">
@@ -216,7 +166,7 @@ if(isset($_POST['Submit'])){
                       <img src= "<?= "uploads/".$image?>" alt="" width="100px" height="100px" name="image" class="thumbnail">
                     </div>
                     <div class="form-group">
-                      <button type="submit" name="Submit" class="btn btn-primary waves">Submit</button>
+                      <button type="submit" name="SubmitUpdate" class="btn btn-primary waves">Submit</button>
                     </div>
                      
                         
